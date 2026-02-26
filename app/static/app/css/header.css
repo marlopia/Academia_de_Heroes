@@ -1,0 +1,21 @@
+header {
+    text-align: center;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+header h1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 3em;
+    color: #222;
+    margin-bottom: 0.5em;
+}
+
+header img {
+    height: 100px;
+    width: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}

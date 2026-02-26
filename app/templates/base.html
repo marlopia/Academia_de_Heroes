@@ -4,6 +4,9 @@
     <title>Academia de Heroes</title>
 </head>
 <body>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'app/css/palette.css' %}">
 
     {% include "components/header.html" %}
 
@@ -12,8 +15,11 @@
 
     {% include "components/navbar.html" %}
 
-    {% block content %}
-    {% endblock %}
-
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    
+    {% include "components/footer.html" %}
 </body>
 </html>

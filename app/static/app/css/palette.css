@@ -1,0 +1,51 @@
+:root {
+    --color-fondo: #1e1e2f;
+    --color-principal: #4e79a7;
+    --color-secundario: #f28e2b;
+    --color-acento: #e15759;
+    --color-texto: #f0f0f0;
+}
+
+/* body y fondo general */
+body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: Arial, sans-serif;
+}
+
+/* header */
+header {
+    background-color: var(--color-principal);
+    color: var(--color-texto);
+    text-align: center;
+    padding: 1em 0;
+}
+
+/* navbar */
+nav ul li a {
+    background-color: var(--color-secundario);
+    color: var(--color-texto);
+    padding: 0.75em 1.5em;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: var(--color-acento);
+}
+
+/* botones generales */
+button {
+    background-color: var(--color-principal);
+    color: var(--color-texto);
+    border: none;
+    border-radius: 5px;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--color-acento);
+}

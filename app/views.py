@@ -35,7 +35,7 @@ def buscar(request):
 
 
 def luchar(request):
-    return HttpResponse("TODO")
+    return render(request, "luchar.html")
 
 
 def info_personaje(request, id):
