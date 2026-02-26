@@ -1,0 +1,38 @@
+.personajes-lista {
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    margin: 2em auto;
+}
+
+.personaje-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2a2a3f;
+    padding: 0.8em 1em;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    margin-bottom: 2em;
+}
+
+.personaje-row span {
+    color: white;
+    font-weight: bold;
+}
+
+.personaje-row button {
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 5px;
+    background-color: #4e79a7;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.personaje-row button:hover {
+    background-color: #e15759;
+    transform: scale(1.05);
+}

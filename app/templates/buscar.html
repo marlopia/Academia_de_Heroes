@@ -1,16 +1,20 @@
 {% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'app/css/buscar.css' %}">
 
 {% block indice %}
 <h2>Buscar personajes</h2>
 {% endblock %}
 
 {% block content %}
-<ul>
+<div class="personajes-lista">
     {% for personaje in personajes %}
-        <li>{{ personaje }}</li>
+    <div class="personaje-row">
+        <span>{{ personaje }}</span>
         <a href="{% url 'info_personaje' personaje.id %}">
-                <button>Ver info</button>
-            </a>
+            <button>Ver info</button>
+        </a>
+    </div>
     {% endfor %}
-</ul>
+</div>
 {% endblock %}

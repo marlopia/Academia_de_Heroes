@@ -17,6 +17,9 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
+from django.views.generic import RedirectView
+from django.conf import settings
+from django.conf.urls.static import static
 
 from app import views
 
@@ -27,4 +30,5 @@ urlpatterns = [
     path("buscar/", views.buscar, name="buscar"),
     path("luchar/", views.luchar, name="luchar"),
     path("<int:id>/info/", views.info_personaje, name="info_personaje"),
-]
+    path("favicon.ico", RedirectView.as_view(url="/static/app/images/favicon.ico")),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
