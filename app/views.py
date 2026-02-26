@@ -1,12 +1,12 @@
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from app.models import Personaje
 
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Hello world!")
+    return render(request, "index.html")
 
 
 def crear(request):
@@ -28,5 +28,16 @@ def crear(request):
     return render(request, "crear.html")
 
 
-def listar(request):
-    return HttpResponse(Personaje.objects.all())
+def buscar(request):
+    personajes = Personaje.objects.all()
+
+    return render(request, "buscar.html", {"personajes": personajes})
+
+
+def luchar(request):
+    return HttpResponse("TODO")
+
+
+def info_personaje(request, id):
+    personaje = get_object_or_404(Personaje, id=id)
+    return render(request, "info.html", {"personaje": personaje})

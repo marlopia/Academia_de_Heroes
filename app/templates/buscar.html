@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block indice %}
+<h2>Buscar personajes</h2>
+{% endblock %}
+
+{% block content %}
+<ul>
+    {% for personaje in personajes %}
+        <li>{{ personaje }}</li>
+        <a href="{% url 'info_personaje' personaje.id %}">
+                <button>Ver info</button>
+            </a>
+    {% endfor %}
+</ul>
+{% endblock %}

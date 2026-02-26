@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Detalle de {{ personaje.nombre }}</h2>
+
+<p>ID: {{ personaje.id }}</p>
+<p>Nivel: {{ personaje.nivel }}</p>
+<p>Vida: {{ personaje.vida }}/{{ personaje.vida_max }}</p>
+
+{% endblock %}

@@ -1,5 +1,10 @@
-<h1>Crear personaje</h1>
+{% extends "base.html" %}
 
+{% block indice %}
+<h2>Crear personaje</h2>
+{% endblock %}
+
+{% block content %}
 <form method="post">
 
     {% csrf_token %}
@@ -16,3 +21,4 @@
     <button type="submit">Crear</button>
 
 </form>
+{% endblock %}
