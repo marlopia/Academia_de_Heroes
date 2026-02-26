@@ -37,7 +37,26 @@ def buscar(request):
 
 
 def luchar(request):
-    return render(request, "luchar.html")
+    personajes = Personaje.objects.all()
+
+    if request.method == "POST":
+        personaje_id1 = request.POST.get("personaje1")
+        personaje1 = Personaje.objects.get(id=personaje_id1)
+
+        personaje_id2 = request.POST.get("personaje2")
+        personaje2 = Personaje.objects.get(id=personaje_id2)
+
+        return render(
+            request,
+            "luchar.html",
+            {
+                "personajes": personajes,
+                "seleccionado1": personaje1,
+                "seleccionado2": personaje2,
+            },
+        )
+
+    return render(request, "luchar.html", {"personajes": personajes})
 
 
 def info_personaje(request, id):

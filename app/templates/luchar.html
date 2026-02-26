@@ -5,5 +5,30 @@
 {% endblock %}
 
 {% block content %}
-<p>TODO</p>
+<form method="post">
+    {% csrf_token %}
+    <label for="personaje1">Elige el primer personaje:</label>
+    <select name="personaje1" id="personaje1">
+        {% for p in personajes %}
+            <option value="{{ p.id }}">{{ p }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="personaje2">Elige el segundo personaje:</label>
+    <select name="personaje2" id="personaje2">
+        {% for p in personajes %}
+            <option value="{{ p.id }}">{{ p }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Seleccionar</button>
+</form>
+
+{% if seleccionado1 %}
+    <p>Personaje seleccionado 1: {{ seleccionado1 }}</p>
+{% endif %}
+
+{% if seleccionado2 %}
+    <p>Personaje seleccionado 2: {{ seleccionado2 }}</p>
+{% endif %}
 {% endblock %}
