@@ -1,0 +1,18 @@
+<h1>Crear personaje</h1>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    <label>Nombre:</label>
+    <input type="text" name="nombre">
+
+    <label>Nivel:</label>
+    <input type="number" name="nivel">
+
+    <label>Vida:</label>
+    <input type="number" name="vida">
+
+    <button type="submit">Crear</button>
+
+</form>
