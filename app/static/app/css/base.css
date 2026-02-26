@@ -13,3 +13,21 @@ main {
     max-width: 1200px;
     margin: 1em 0;
 }
+
+#toast-container {
+    position: fixed;
+    top: 1em;
+    right: 1em;
+    z-index: 9999;
+}
+
+.toast {
+    background-color: #4e79a7;  /* color de éxito */
+    color: white;
+    padding: 1em 1.5em;
+    margin-bottom: 0.5em;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    opacity: 0.95;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}

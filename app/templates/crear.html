@@ -6,19 +6,31 @@
 
 {% block content %}
 <form method="post">
-
     {% csrf_token %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app/css/crear.css' %}">
 
-    <label>Nombre:</label>
-    <input type="text" name="nombre">
+    <div class="form-wrapper">
+        <img src="{% static 'app/images/char_placeholder.png' %}" alt="Silueta del personaje">
 
-    <label>Nivel:</label>
-    <input type="number" name="nivel">
+        <div class="form-campos">
+            <div class="campo">
+                <label>Nombre:</label>
+                <input type="text" name="nombre">
+            </div>
 
-    <label>Vida:</label>
-    <input type="number" name="vida">
+            <div class="campo">
+                <label>Nivel:</label>
+                <input type="number" name="nivel">
+            </div>
 
-    <button type="submit">Crear</button>
+            <div class="campo">
+                <label>Vida:</label>
+                <input type="number" name="vida">
+            </div>
 
+            <button type="submit">Crear</button>
+        </div>
+    </div>
 </form>
 {% endblock %}
