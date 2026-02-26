@@ -4,8 +4,28 @@
 
 <h2>Detalle de {{ personaje.nombre }}</h2>
 
-<p>ID: {{ personaje.id }}</p>
-<p>Nivel: {{ personaje.nivel }}</p>
-<p>Vida: {{ personaje.vida }}/{{ personaje.vida_max }}</p>
+<form method="post">
+    {% csrf_token %}
+
+    <label>ID:</label>
+    <input type="text" value="{{ personaje.id }}" disabled>
+
+    <label>Nombre:</label>
+    <input type="text" name="nombre" value="{{ personaje.nombre }}">
+
+    <label>Nivel:</label>
+    <input type="number" name="nivel" value="{{ personaje.nivel }}">
+
+    <label>Vida:</label>
+    <input type="number" name="vida" value="{{ personaje.vida }}">
+
+    <label>Vida máxima:</label>
+    <input type="number" name="vida_max" value="{{ personaje.vida_max }}">
+
+    <div style="margin-top:1em;">
+        <button type="submit" name="guardar">Guardar</button>
+        <button type="submit" name="borrar" style="background-color:#e15759;">Borrar</button>
+    </div>
+</form>
 
 {% endblock %}

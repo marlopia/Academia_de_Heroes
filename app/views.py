@@ -61,4 +61,20 @@ def luchar(request):
 
 def info_personaje(request, id):
     personaje = get_object_or_404(Personaje, id=id)
+
+    if request.method == "POST":
+        if "guardar" in request.POST:
+            personaje.nombre = request.POST.get("nombre", personaje.nombre)
+            personaje.nivel = int(request.POST.get("nivel", personaje.nivel))
+            personaje.vida = int(request.POST.get("vida", personaje.vida))
+            personaje.vida_max = int(request.POST.get("vida_max", personaje.vida_max))
+            personaje.save()
+            messages.success(request, "Personaje actualizado correctamente")
+            return redirect("info_personaje", id=id)
+
+        elif "borrar" in request.POST:
+            personaje.delete()
+            messages.success(request, "Personaje borrado correctamente")
+            return redirect("buscar")
+
     return render(request, "info.html", {"personaje": personaje})
