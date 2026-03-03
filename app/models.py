@@ -1,3 +1,4 @@
+from django.utils import timezone
 import random
 from typing import cast
 
@@ -233,6 +234,25 @@ class Arquero(Personaje):
         base["precision"] = self.precision
 
         return base
+
+
+class StatsEntrenar(models.Model):
+    timestamp = models.DateTimeField(primary_key=True, default=timezone.now)
+    personaje = models.ForeignKey(
+        "Personaje", on_delete=models.CASCADE, related_name="entrenamientos"
+    )
+    nivel = models.PositiveIntegerField()
+
+
+class StatsLuchar(models.Model):
+    timestamp = models.DateTimeField(primary_key=True, default=timezone.now)
+    p1 = models.ForeignKey(
+        "Personaje", on_delete=models.CASCADE, related_name="player1"
+    )
+    p2 = models.ForeignKey(
+        "Personaje", on_delete=models.CASCADE, related_name="player2"
+    )
+    p1_win = models.BooleanField()
 
 
 def simular_turno(p1: Personaje, p2: Personaje) -> int:

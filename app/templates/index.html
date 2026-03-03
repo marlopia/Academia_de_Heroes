@@ -3,12 +3,14 @@
 {% block indice %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'app/css/indice.css' %}">
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <h2>Índice</h2>
 {% endblock %}
 
 {% block content %}
-<span>
-    <textarea>"DASHBOARDS"</textarea>
-    <p>Pariatur incididunt ipsum culpa qui anim et. Deserunt occaecat eiusmod voluptate commodo. Non aliquip quis velit do amet exercitation do. Ad excepteur incididunt est non excepteur esse nisi do mollit.</p>
-</span>
+<div>
+    <div>
+        {{ plot_div|safe }}
+    </div>
+</div>
 {% endblock %}

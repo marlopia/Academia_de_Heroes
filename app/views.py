@@ -1,13 +1,40 @@
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
+from plotly.offline import plot
+import plotly.graph_objs as go
 from django.shortcuts import get_object_or_404, redirect, render
 
-from app.models import Personaje
+from app.models import Arquero, Guerrero, Mago, Personaje
 
 
 # Create your views here.
 def index(request):
-    return render(request, "index.html")
+    conteos = {
+        "Guerrero": Guerrero.objects.count(),
+        "Arquero": Arquero.objects.count(),
+        "Mago": Mago.objects.count(),
+    }
+
+    fig = go.Figure(
+        data=[
+            go.Bar(
+                x=list(conteos.keys()),
+                y=list(conteos.values()),
+                marker_color=["#4e79a7", "#e15759", "#f28e2b"],
+            )
+        ]
+    )
+    fig.update_layout(
+        title="Conteo de personajes por clase",
+        xaxis_title="Clase",
+        yaxis_title="Cantidad",
+    )
+
+    plot_div = plot(
+        fig, output_type="div", include_plotlyjs=False
+    )  # Solo el div, JS externo
+
+    return render(request, "index.html", {"plot_div": plot_div})
 
 
 def crear(request):
