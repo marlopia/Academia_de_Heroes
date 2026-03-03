@@ -1,28 +1,46 @@
 {% extends "base.html" %}
 
 {% block indice %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'app/css/indice.css' %}">
 <h2>Luchar</h2>
 {% endblock %}
 
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    <label for="personaje1">Elige el primer personaje:</label>
-    <select name="personaje1" id="personaje1">
-        {% for p in personajes %}
-            <option value="{{ p.id }}">{{ p }}</option>
-        {% endfor %}
-    </select>
+{% load static %}
+<link rel="stylesheet" href="{% static 'app/css/luchar.css' %}">
 
-    <label for="personaje2">Elige el segundo personaje:</label>
-    <select name="personaje2" id="personaje2">
-        {% for p in personajes %}
-            <option value="{{ p.id }}">{{ p }}</option>
-        {% endfor %}
-    </select>
+<div class="luchar-container">
+    <form method="post" class="luchar-form">
+        {% csrf_token %}
 
-    <button type="submit">Seleccionar</button>
-</form>
+        <div>
+            <label for="personaje1">Elige el primer personaje:</label>
+            <select name="personaje1" id="personaje1">
+                {% for p in personajes %}
+                    <option value="{{ p.id }}">{{ p }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label for="personaje2">Elige el segundo personaje:</label>
+            <select name="personaje2" id="personaje2">
+                {% for p in personajes %}
+                    <option value="{{ p.id }}">{{ p }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit">Iniciar combate</button>
+    </form>
+
+    {% if seleccionado1 %}
+        <div class="resultado-combate">
+            {{ seleccionado1 }} VS {{ seleccionado2 }}
+        </div>
+    {% endif %}
+</div>
 
 {% if seleccionado1 %}
     <p>Personaje seleccionado 1: {{ seleccionado1 }}</p>

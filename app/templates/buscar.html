@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 
+{% block indice %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'app/css/indice.css' %}">
+<h2>Buscar</h2>
+{% endblock %}
+
 {% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'app/css/buscar.css' %}">

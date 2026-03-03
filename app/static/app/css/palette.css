@@ -15,7 +15,6 @@ body {
 
 /* header */
 header {
-    background-color: var(--color-principal);
     color: var(--color-texto);
     text-align: center;
     padding: 1em 0;

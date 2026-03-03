@@ -1,0 +1,65 @@
+.luchar-container {
+    max-width: 700px;
+    margin: 2.5em auto;
+    background-color: #2a2a3f;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.luchar-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+.luchar-form label {
+    font-weight: bold;
+    color: white;
+    margin-bottom: 0.3em;
+}
+
+.luchar-form select {
+    padding: 0.7em 1em;
+    border-radius: 6px;
+    border: 1px solid #3a3a55;
+    background-color: #1f1f2e;
+    color: white;
+    font-size: 0.95em;
+    outline: none;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+.luchar-form select:focus {
+    border: 1px solid #4e79a7;
+    box-shadow: 0 0 0 2px rgba(78,121,167,0.2);
+}
+
+.luchar-form button {
+    margin-top: 1em;
+    padding: 0.8em;
+    border: none;
+    border-radius: 6px;
+    background-color: #4e79a7;
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.luchar-form button:hover {
+    background-color: #e15759;
+    transform: scale(1.03);
+}
+
+.resultado-combate {
+    margin-top: 2em;
+    padding: 1.2em;
+    background-color: #1f1f2e;
+    border-radius: 8px;
+    color: #b0b3d6;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
