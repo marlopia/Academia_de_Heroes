@@ -77,7 +77,15 @@ def info_personaje(request, id):
             messages.success(request, "Personaje borrado correctamente")
             return redirect("buscar")
 
+        elif "entrenar" in request.POST:
+            personaje.subir_nivel()
+            messages.success(
+                request, f"{personaje.nombre} subió a nivel {personaje.nivel}!"
+            )
+            return redirect("info_personaje", id=id)
+
     return render(request, "info.html", {"personaje": personaje})
+
 
 def buscar_personajes(request):
     nombre = request.GET.get("nombre", "")

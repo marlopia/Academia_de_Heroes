@@ -1,30 +1,53 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block indice %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'app/css/indice.css' %}">
+<h2>Detalles de {{ personaje.nombre }}</h2>
+{% endblock %}
 
-<h2>Detalle de {{ personaje.nombre }}</h2>
+{% block content %}
 
 <form method="post">
     {% csrf_token %}
 
-    <label>ID:</label>
-    <input type="text" value="{{ personaje.id }}" disabled>
+    <div class="form-wrapper">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'app/css/crear.css' %}">
+        <img src="{% static 'app/images/char_placeholder.png' %}" alt="Silueta del personaje">
 
-    <label>Nombre:</label>
-    <input type="text" name="nombre" value="{{ personaje.nombre }}">
+        <div class="form-campos">
+            <div class="campo">
+                <label>ID:</label>
+                <input type="text" value="{{ personaje.id }}" disabled>
+            </div>
 
-    <label>Nivel:</label>
-    <input type="number" name="nivel" value="{{ personaje.nivel }}">
+            <div class="campo">
+                <label>Nombre:</label>
+                <input type="text" name="nombre" value="{{ personaje.nombre }}">
+            </div>
 
-    <label>Vida:</label>
-    <input type="number" name="vida" value="{{ personaje.vida }}">
+            <div class="campo">
+                <label>Nivel:</label>
+                <input type="number" name="nivel" value="{{ personaje.nivel }}">
+            </div>
 
-    <label>Vida máxima:</label>
-    <input type="number" name="vida_max" value="{{ personaje.vida_max }}">
+            <div class="campo">
+                <label>Vida:</label>
+                <input type="number" name="vida" value="{{ personaje.vida }}">
+            </div>
 
-    <div style="margin-top:1em;">
-        <button type="submit" name="guardar">Guardar</button>
-        <button type="submit" name="borrar" style="background-color:#e15759;">Borrar</button>
+            <div class="campo">
+                <label>Vida máxima:</label>
+                <input type="number" name="vida_max" value="{{ personaje.vida_max }}">
+            </div>
+
+            <div style="margin-top:1em;">
+                <button type="submit" name="guardar">Guardar</button>
+                <button type="submit" name="entrenar" style="background-color:#5ce157;">Entrenar</button>
+                <button type="submit" name="borrar" style="background-color:#e15759;">Borrar</button>
+            </div>
+        </div>
     </div>
 </form>
 
