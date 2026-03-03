@@ -5,31 +5,75 @@
     margin: 2em auto;
 }
 
+.filtros {
+    display: flex;
+    gap: 1em;
+    margin: 2em auto;
+    max-width: 800px;
+    padding: 1.2em;
+    background-color: #2a2a3f;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.filtros input {
+    flex: 1;
+    padding: 0.6em 0.8em;
+    border-radius: 6px;
+    border: 1px solid #3a3a55;
+    background-color: #1f1f2e;
+    color: white;
+    outline: none;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+.filtros input:focus {
+    border: 1px solid #4e79a7;
+    box-shadow: 0 0 0 2px rgba(78,121,167,0.2);
+}
+
 .personaje-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #2a2a3f;
-    padding: 0.8em 1em;
+    padding: 1em 1.2em;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    margin-bottom: 2em;
+    margin-bottom: 1.5em;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.personaje-row:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.personaje-row div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+}
+
+.personaje-row strong {
+    color: white;
+    font-size: 1.05em;
 }
 
 .personaje-row span {
-    color: white;
-    font-weight: bold;
+    color: #b0b3d6;
+    font-size: 0.9em;
 }
 
 .personaje-row button {
-    padding: 0.5em 1em;
+    padding: 0.5em 1.1em;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     background-color: #4e79a7;
     color: white;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
 .personaje-row button:hover {

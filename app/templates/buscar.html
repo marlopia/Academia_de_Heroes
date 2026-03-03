@@ -1,20 +1,52 @@
 {% extends "base.html" %}
+
+{% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'app/css/buscar.css' %}">
 
-{% block indice %}
-<h2>Buscar personajes</h2>
-{% endblock %}
-
-{% block content %}
-<div class="personajes-lista">
-    {% for personaje in personajes %}
-    <div class="personaje-row">
-        <span>{{ personaje }}</span>
-        <a href="{% url 'info_personaje' personaje.id %}">
-            <button>Ver info</button>
-        </a>
-    </div>
-    {% endfor %}
+<div class="filtros">
+    <input type="text" id="filtro-nombre" placeholder="Nombre">
+    <input type="number" id="filtro-nivel" placeholder="Nivel">
+    <input type="number" id="filtro-vida" placeholder="Vida mínima">
 </div>
+
+<div class="personajes-lista" id="resultados">
+</div>
+
+<script>
+function cargarResultados() {
+    const nombre = document.getElementById("filtro-nombre").value;
+    const nivel = document.getElementById("filtro-nivel").value;
+    const vida = document.getElementById("filtro-vida").value;
+
+    fetch(`/buscar/api/?nombre=${nombre}&nivel=${nivel}&vida=${vida}`)
+        .then(response => response.json())
+        .then(data => {
+            const contenedor = document.getElementById("resultados");
+            contenedor.innerHTML = "";
+
+            data.forEach(p => {
+                contenedor.innerHTML += `
+                    <div class="personaje-row">
+                        <div>
+                            <strong>${p.nombre}</strong>
+                            <span>Nivel: ${p.nivel}</span>
+                            <span>Vida: ${p.vida}/${p.vida_max}</span>
+                        </div>
+                        <a href="/${p.id}/info/">
+                            <button>Ver info</button>
+                        </a>
+                    </div>
+                `;
+            });
+        });
+}
+
+document.querySelectorAll(".filtros input").forEach(input => {
+    input.addEventListener("input", cargarResultados);
+});
+
+cargarResultados();
+</script>
+
 {% endblock %}

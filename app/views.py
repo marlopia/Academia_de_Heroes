@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
 from app.models import Personaje
@@ -78,3 +78,32 @@ def info_personaje(request, id):
             return redirect("buscar")
 
     return render(request, "info.html", {"personaje": personaje})
+
+def buscar_personajes(request):
+    nombre = request.GET.get("nombre", "")
+    nivel = request.GET.get("nivel", "")
+    vida = request.GET.get("vida", "")
+
+    personajes = Personaje.objects.all()
+
+    if nombre:
+        personajes = personajes.filter(nombre__icontains=nombre)
+
+    if nivel:
+        personajes = personajes.filter(nivel=nivel)
+
+    if vida:
+        personajes = personajes.filter(vida__gte=vida)
+
+    data = [
+        {
+            "id": p.id,
+            "nombre": p.nombre,
+            "nivel": p.nivel,
+            "vida": p.vida,
+            "vida_max": p.vida_max,
+        }
+        for p in personajes
+    ]
+
+    return JsonResponse(data, safe=False)

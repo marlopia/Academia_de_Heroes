@@ -6,6 +6,8 @@ from django.core.exceptions import ValidationError
 
 
 class Personaje(models.Model):
+    id: int
+
     vida_max_base: int = 100
 
     nombre = models.CharField(max_length=100)

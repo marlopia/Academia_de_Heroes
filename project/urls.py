@@ -31,4 +31,5 @@ urlpatterns = [
     path("luchar/", views.luchar, name="luchar"),
     path("<int:id>/info/", views.info_personaje, name="info_personaje"),
     path("favicon.ico", RedirectView.as_view(url="/static/app/images/favicon.ico")),
+    path("buscar/api/", views.buscar_personajes, name="buscar_api"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
