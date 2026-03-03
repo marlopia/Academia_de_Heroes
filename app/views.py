@@ -6,6 +6,12 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from app.models import Arquero, Guerrero, Mago, Personaje
 
+ATRIBUTOS_EXTRA = {
+    "Guerrero": "armadura",
+    "Mago": "mana",
+    "Arquero": "precision",
+}
+
 
 # Create your views here.
 def index(request):
@@ -42,14 +48,28 @@ def crear(request):
     if request.method == "POST":
 
         nombre = request.POST.get("nombre")
+        clase = request.POST.get("clase")
         nivel = request.POST.get("nivel")
         vida = request.POST.get("vida")
 
-        Personaje.objects.create(
-            nombre=nombre,
-            nivel=int(nivel),
-            vida=int(vida),
-        )
+        if clase == "Guerrero":
+            Guerrero.objects.create(
+                nombre=nombre,
+                nivel=int(nivel),
+                vida=int(vida),
+            )
+        elif clase == "Mago":
+            Mago.objects.create(
+                nombre=nombre,
+                nivel=int(nivel),
+                vida=int(vida),
+            )
+        elif clase == "Arquero":
+            Arquero.objects.create(
+                nombre=nombre,
+                nivel=int(nivel),
+                vida=int(vida),
+            )
 
         messages.success(request, "Personaje creado correctamente")
         return redirect("/crear")
@@ -89,7 +109,9 @@ def luchar(request):
 
 
 def info_personaje(request, id):
-    personaje = get_object_or_404(Personaje, id=id)
+    personaje = Personaje.objects.get(id=id)
+    clases = [cls.__name__ for cls in Personaje.__subclasses__()]
+    clase_actual = personaje.__class__.__name__
 
     if request.method == "POST":
         if "guardar" in request.POST:
@@ -113,7 +135,11 @@ def info_personaje(request, id):
             )
             return redirect("info_personaje", id=id)
 
-    return render(request, "info.html", {"personaje": personaje})
+    return render(
+        request,
+        "info.html",
+        {"personaje": personaje, "clases": clases, "clase_actual": clase_actual},
+    )
 
 
 def buscar_personajes(request):
