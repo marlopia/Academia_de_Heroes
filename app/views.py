@@ -54,7 +54,9 @@ def crear(request):
         messages.success(request, "Personaje creado correctamente")
         return redirect("/crear")
 
-    return render(request, "crear.html")
+    else:
+        clases = [cls.__name__ for cls in Personaje.__subclasses__()]
+        return render(request, "crear.html", {"clases": clases})
 
 
 def buscar(request):

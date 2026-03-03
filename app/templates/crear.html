@@ -22,6 +22,15 @@
             </div>
 
             <div class="campo">
+                <label>Clase:</label>
+                <select name="clase">
+                    {% for clase in clases %}
+                        <option value="{{ clase }}">{{ clase }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="campo">
                 <label>Nivel:</label>
                 <input type="number" name="nivel">
             </div>
