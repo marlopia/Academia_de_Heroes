@@ -21,9 +21,7 @@ def crear(request):
         vida = request.POST.get("vida")
 
         Personaje.objects.create(
-            nombre=nombre,
-            nivel=int(nivel),
-            vida=int(vida),
+            nombre=nombre, nivel=int(nivel), vida=int(vida), usuario=request.user.id
         )
 
         messages.success(request, "Personaje creado correctamente")
@@ -33,7 +31,7 @@ def crear(request):
 
 
 def buscar(request):
-    personajes = Personaje.objects.all()
+    personajes = Personaje.objects.filter(usuario=request.user.id)
 
     return render(request, "buscar.html", {"personajes": personajes})
 
@@ -87,7 +85,7 @@ def buscar_personajes(request):
     nivel = request.GET.get("nivel", "")
     vida = request.GET.get("vida", "")
 
-    personajes = Personaje.objects.all()
+    personajes = Personaje.objects.filter(usuario=request.user.id)
 
     if nombre:
         personajes = personajes.filter(nombre__icontains=nombre)

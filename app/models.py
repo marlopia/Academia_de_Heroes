@@ -19,6 +19,8 @@ class Personaje(models.Model):
 
     vida_max = models.PositiveIntegerField(default=vida_max_base)
 
+    usuario = models.PositiveIntegerField()
+
     def clean(self):
         """
         Valida que el objeto sea correcto antes de guardarlo en memoria
