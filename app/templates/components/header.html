@@ -3,4 +3,20 @@
 <header>
     <h1>Academia de Heroes</h1>
     <img src="{% static 'app/images/logo.png' %}" alt="logo">
+    {% if user.is_authenticated %}
+
+    <p><strong>Usuario:</strong> {{ user.username }}</p>
+    <p><strong>Monedas:</strong> {{ user.perfil.monedas }}</p>
+    <p><strong>Mercenarios:</strong> {{ user.perfil.mercenarios }}</p>
+    <form method="post" action="{% url 'comprar_mercenario' %}">
+        {% csrf_token %}
+        <button type="submit">
+            Comprar mercenario (3 monedas)
+        </button>
+    </form>
+    <p><strong>Admin:</strong> {{ user.perfil.es_admin_app }}</p>
+
+    <a href="/logout">Cerrar sesión</a>
+
+    {% endif %}
 </header>

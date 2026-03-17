@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
@@ -9,6 +9,8 @@ from app.models import Personaje, Perfil
 
 # Create your views here.
 def index(request):
+    if not request.user.is_authenticated:
+        return redirect("user_login")
     return render(request, "index.html")
 
 
@@ -141,3 +143,22 @@ def registrar(request):
         return redirect("user_login")
 
     return render(request, "register.html")
+
+
+def user_logout(request):
+    logout(request)
+    return redirect("user_login")
+
+
+def comprar_mercenario(request):
+    if request.method == "POST":
+        perfil = request.user.perfil
+
+        if perfil.monedas >= 3:
+            perfil.monedas -= 3
+            perfil.mercenarios += 1
+            perfil.save()
+        else:
+            messages.error(request, "Monedas insuficientes")
+
+    return redirect(request.META.get("HTTP_REFERER", "/"))

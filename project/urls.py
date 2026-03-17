@@ -34,4 +34,6 @@ urlpatterns = [
     path("buscar/api/", views.buscar_personajes, name="buscar_api"),
     path("login/", views.user_login, name="user_login"),
     path("register/", views.registrar, name="register"),
+    path("logout/", views.user_logout, name="user_logout"),
+    path("comprar_mercenario/", views.comprar_mercenario, name="comprar_mercenario"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
