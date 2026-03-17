@@ -132,11 +132,14 @@ def user_login(request):
 def registrar(request):
     if request.method == "POST":
         usuario = request.POST.get("user", "")
+        dni = request.POST.get("dni", "")
+        telefono = request.POST.get("telefono", "")
+        fnac = request.POST.get("fnac", "")
         password = request.POST.get("password", "")
 
         user = User.objects.create_user(username=usuario, password=password)
 
-        Perfil.objects.create(user=user)
+        Perfil.objects.create(user=user, dni=dni, telefono=telefono, fnac=fnac)
 
         messages.success(request, "Usuario registrado!")
 

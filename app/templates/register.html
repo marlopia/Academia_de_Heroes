@@ -21,6 +21,23 @@
             </div>
 
             <div class="campo">
+                <label>DNI:</label>
+                <input type="text" name="dni" required pattern="^[0-9]{8}[A-Za-z]$"
+       title="Debe tener 8 números y una letra (ej: 12345678Z)">
+            </div>
+
+            <div class="campo">
+                <label>Teléfono:</label>
+                <input type="text" name="telefono" required pattern="^[0-9]{9}$"
+       title="Debe tener 9 números (ej: 612345678)">
+            </div>
+
+            <div class="campo">
+                <label>Fecha Nacimiento:</label>
+                <input type="date" name="fnac" required>
+            </div>
+
+            <div class="campo">
                 <label>Contraseña:</label>
                 <input type="password" name="password" required>
             </div>

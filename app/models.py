@@ -266,6 +266,9 @@ def simular_turno(p1: Personaje, p2: Personaje) -> int:
 class Perfil(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     es_admin_app = models.BooleanField(default=False)
+    dni = models.CharField(max_length=100)
+    telefono = models.CharField(max_length=20)
+    fnac = models.DateField()
     monedas = models.PositiveIntegerField(default=10)
     mercenarios = models.PositiveIntegerField(default=0)
 
