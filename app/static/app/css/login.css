@@ -1,0 +1,76 @@
+form .form-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    max-width: 600px;
+    margin: 2em auto;
+    background-color: #2a2a3f;
+    padding: 1.5em;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+form .form-wrapper img {
+    height: 200px;
+    width: auto;
+    border-radius: 8px;
+    margin-right: 1.5em;
+}
+
+form .form-campos {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+form .form-campos .campo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+
+form .form-campos .campo label {
+    font-weight: bold;
+    margin-bottom: 0.2em;
+}
+
+form .form-campos .campo input {
+    padding: 0.5em;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background-color: #1e1e2f;
+    color: white;
+}
+
+form .form-campos button {
+    padding: 0.7em 1.5em;
+    border: none;
+    border-radius: 5px;
+    background-color: #4e79a7;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    align-self: center;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+form .form-campos button:hover {
+    background-color: #e15759;
+    transform: scale(1.05);
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  background: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #0056b3;
+  border-color: #0056b3;
+}

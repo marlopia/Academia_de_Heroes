@@ -2,6 +2,7 @@ import random
 from typing import cast
 
 from django.db import models
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
 
@@ -258,3 +259,13 @@ def simular_turno(p1: Personaje, p2: Personaje) -> int:
     p2.recibir_danio(danio)
     print(f"Vida restante de {p2.nombre}: {p2.vida}/{p2.vida_max}")
     return danio
+
+
+class Perfil(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    es_admin_app = models.BooleanField(default=False)
+    monedas = models.PositiveIntegerField(default=10)
+    mercenarios = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.user.username

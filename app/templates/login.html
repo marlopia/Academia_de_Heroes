@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block indice %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'app/css/indice.css' %}">
+<h2>Crear personaje</h2>
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app/css/login.css' %}">
+
+    <div class="form-wrapper">
+
+        <div class="form-campos">
+            <div class="campo">
+                <label>Usuario:</label>
+                <input type="text" name="user" required>
+            </div>
+
+            <div class="campo">
+                <label>Contraseña:</label>
+                <input type="password" name="password" required>
+            </div>
+
+            <button type="submit">Acceder</button>
+            <a href="/register" class="btn">Crear Cuenta</a>
+        </div>
+    </div>
+</form>
+{% endblock %}

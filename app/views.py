@@ -1,8 +1,10 @@
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
-from app.models import Personaje
+from app.models import Personaje, Perfil
 
 
 # Create your views here.
@@ -79,6 +81,7 @@ def info_personaje(request, id):
 
     return render(request, "info.html", {"personaje": personaje})
 
+
 def buscar_personajes(request):
     nombre = request.GET.get("nombre", "")
     nivel = request.GET.get("nivel", "")
@@ -107,3 +110,36 @@ def buscar_personajes(request):
     ]
 
     return JsonResponse(data, safe=False)
+
+
+def user_login(request):
+    if request.method == "POST":
+        usuario = request.POST.get("user", "")
+        password = request.POST.get("password", "")
+
+        user = authenticate(request, username=usuario, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect("index")
+        else:
+            messages.error(request, "Credenciales incorrectas")
+            return redirect("user_login")
+
+    return render(request, "login.html")
+
+
+def registrar(request):
+    if request.method == "POST":
+        usuario = request.POST.get("user", "")
+        password = request.POST.get("password", "")
+
+        user = User.objects.create_user(username=usuario, password=password)
+
+        Perfil.objects.create(user=user)
+
+        messages.success(request, "Usuario registrado!")
+
+        return redirect("user_login")
+
+    return render(request, "register.html")

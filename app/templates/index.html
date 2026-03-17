@@ -7,6 +7,21 @@
 {% endblock %}
 
 {% block content %}
+{% if user.is_authenticated %}
+
+    <p><strong>Usuario:</strong> {{ user.username }}</p>
+
+    <p><strong>Monedas:</strong> {{ user.perfil.monedas }}</p>
+
+    <p><strong>Mercenarios:</strong> {{ user.perfil.mercenarios }}</p>
+
+    <p><strong>Admin:</strong> {{ user.perfil.es_admin_app }}</p>
+
+{% else %}
+
+    <p>No has iniciado sesión.</p>
+
+{% endif %}
 <span>
     <textarea>"DASHBOARDS"</textarea>
     <p>Pariatur incididunt ipsum culpa qui anim et. Deserunt occaecat eiusmod voluptate commodo. Non aliquip quis velit do amet exercitation do. Ad excepteur incididunt est non excepteur esse nisi do mollit.</p>
