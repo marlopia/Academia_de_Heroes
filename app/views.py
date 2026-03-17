@@ -165,3 +165,19 @@ def comprar_mercenario(request):
             messages.error(request, "Monedas insuficientes")
 
     return redirect(request.META.get("HTTP_REFERER", "/"))
+
+
+def entrenar(request, id):
+    if request.method == "POST":
+        perfil = request.user.perfil
+        personaje = get_object_or_404(Personaje, id=id)
+
+        if perfil.mercenarios >= 1:
+            perfil.mercenarios -= 1
+            personaje.subir_nivel()
+
+            perfil.save()
+        else:
+            messages.error(request, "No tienes mercenarios")
+
+    return redirect(request.META.get("HTTP_REFERER", "/"))

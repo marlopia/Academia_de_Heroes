@@ -25,7 +25,15 @@
     <div style="margin-top:1em;">
         <button type="submit" name="guardar">Guardar</button>
         <button type="submit" name="borrar" style="background-color:#e15759;">Borrar</button>
+    </form>
     </div>
+</form>
+
+<form method="post" action="{% url 'entrenar' personaje.id %}">
+    {% csrf_token %}
+    <button type="submit">
+        Entrenar (1 mercenario)
+    </button>
 </form>
 
 {% endblock %}
