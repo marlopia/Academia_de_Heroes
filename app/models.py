@@ -47,8 +47,17 @@ class Personaje(models.Model):
         self.clean()
         super().save(*args, **kwargs)
 
+    def get_clase(self):
+        if hasattr(self, "guerrero"):
+            return "Guerrero"
+        elif hasattr(self, "mago"):
+            return "Mago"
+        elif hasattr(self, "arquero"):
+            return "Arquero"
+        return "Desconocido"
+
     def __str__(self):
-        return f"{self.nombre} (Nivel {self.nivel}) - Vida: {self.vida}/{self.vida_max}"
+        return f"{self.nombre} ({self.get_clase()}) (Nivel {self.nivel}) - Vida: {self.vida}/{self.vida_max}"
 
     def esta_vivo(self) -> bool:
         """
