@@ -14,6 +14,12 @@
     <input type="text" id="filtro-nombre" placeholder="Nombre">
     <input type="number" id="filtro-nivel" placeholder="Nivel">
     <input type="number" id="filtro-vida" placeholder="Vida mínima">
+    <select id="filtro-clase">
+        <option value="">Clase</option>
+        <option value="guerrero">Guerrero</option>
+        <option value="mago">Mago</option>
+        <option value="arquero">Arquero</option>
+    </select>
 </div>
 
 <div class="personajes-lista" id="resultados">
@@ -24,8 +30,9 @@ function cargarResultados() {
     const nombre = document.getElementById("filtro-nombre").value;
     const nivel = document.getElementById("filtro-nivel").value;
     const vida = document.getElementById("filtro-vida").value;
+    const clase = document.getElementById("filtro-clase").value;
 
-    fetch(`/buscar/api/?nombre=${nombre}&nivel=${nivel}&vida=${vida}`)
+    fetch(`/buscar/api/?nombre=${nombre}&nivel=${nivel}&vida=${vida}&clase=${clase}`)
         .then(response => response.json())
         .then(data => {
             const contenedor = document.getElementById("resultados");
@@ -38,6 +45,7 @@ function cargarResultados() {
                             <strong>${p.nombre}</strong>
                             <span>Nivel: ${p.nivel}</span>
                             <span>Vida: ${p.vida}/${p.vida_max}</span>
+                            <span>Clase: ${p.clase}</span>
                         </div>
                         <a href="/${p.id}/info/">
                             <button>Ver info</button>
@@ -48,7 +56,7 @@ function cargarResultados() {
         });
 }
 
-document.querySelectorAll(".filtros input").forEach(input => {
+document.querySelectorAll(".filtros input, .filtros select").forEach(input => {
     input.addEventListener("input", cargarResultados);
 });
 

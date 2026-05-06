@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
-from app.models import Personaje, Perfil
+from app.models import Arquero, Guerrero, Mago, Personaje, Perfil
 
 
 # Create your views here.
@@ -21,13 +21,35 @@ def crear(request):
         nombre = request.POST.get("nombre")
         nivel = request.POST.get("nivel")
         vida = request.POST.get("vida")
+        clase = request.POST.get("clase")
 
-        Personaje.objects.create(
-            nombre=nombre, nivel=int(nivel), vida=int(vida), usuario=request.user.id
-        )
+        if clase == "guerrero":
+            armadura = request.POST.get("armadura")
+            Guerrero.objects.create(
+                nombre=nombre, nivel=int(nivel), vida=int(vida), armadura=int(armadura), usuario=request.user.id
+                )
+            messages.success(request, "Personaje creado correctamente")
+            return redirect("/crear")
 
-        messages.success(request, "Personaje creado correctamente")
-        return redirect("/crear")
+        elif clase == "mago":
+            mana = request.POST.get("mana")
+            Mago.objects.create(
+                nombre=nombre, nivel=int(nivel), vida=int(vida), mana=int(mana), usuario=request.user.id
+                )
+            messages.success(request, "Personaje creado correctamente")
+            return redirect("/crear")
+
+        elif clase == "arquero":
+            precision = request.POST.get("precision")
+            Arquero.objects.create(
+                nombre=nombre, nivel=int(nivel), vida=int(vida), precision=int(precision), usuario=request.user.id
+                )
+            messages.success(request, "Personaje creado correctamente")
+            return redirect("/crear")
+
+        else:
+            messages.error(request, "Error: Clase no reconocida")
+            return redirect("/crear")
 
     return render(request, "crear.html")
 
@@ -86,6 +108,7 @@ def buscar_personajes(request):
     nombre = request.GET.get("nombre", "")
     nivel = request.GET.get("nivel", "")
     vida = request.GET.get("vida", "")
+    clase = request.GET.get("clase", "")
 
     personajes = Personaje.objects.filter(usuario=request.user.id)
 
@@ -98,16 +121,35 @@ def buscar_personajes(request):
     if vida:
         personajes = personajes.filter(vida__gte=vida)
 
-    data = [
-        {
+    if clase == "guerrero":
+        personajes = personajes.filter(guerrero__isnull=False)
+
+    elif clase == "mago":
+        personajes = personajes.filter(mago__isnull=False)
+
+    elif clase == "arquero":
+        personajes = personajes.filter(arquero__isnull=False)
+
+    data = []
+
+    for p in personajes:
+        if hasattr(p, "guerrero"):
+            clase_nombre = "Guerrero"
+        elif hasattr(p, "mago"):
+            clase_nombre = "Mago"
+        elif hasattr(p, "arquero"):
+            clase_nombre = "Arquero"
+        else:
+            clase_nombre = "Desconocido"
+
+        data.append({
             "id": p.id,
             "nombre": p.nombre,
             "nivel": p.nivel,
             "vida": p.vida,
             "vida_max": p.vida_max,
-        }
-        for p in personajes
-    ]
+            "clase": clase_nombre,
+        })
 
     return JsonResponse(data, safe=False)
 
