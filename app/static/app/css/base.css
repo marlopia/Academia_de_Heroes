@@ -57,7 +57,7 @@ option {
     color: #f1f1f1;
 }
 
-input[type="number"] {
+input[type="number"], input[type="text"] {
     background-color: #2b2b2b;
     color: #f1f1f1;
     border: 1px solid #444;
@@ -66,7 +66,7 @@ input[type="number"] {
     font-size: 1rem;
 }
 
-input[type="number"]:focus {
+input[type="number"]:focus, input[type="text"]:focus {
     outline: none;
     border-color: #4e79a7;
     box-shadow: 0 0 5px rgba(78, 121, 167, 0.6);
