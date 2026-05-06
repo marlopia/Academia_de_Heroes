@@ -31,8 +31,54 @@
                 <input type="number" name="vida">
             </div>
 
+            <div class="campo">
+                <label>Clase:</label>
+                <select name="clase" id="clase-select">
+                    <option value="">--Selecciona--</option>
+                    <option value="guerrero">Guerrero</option>
+                    <option value="mago">Mago</option>
+                    <option value="arquero">Arquero</option>
+                </select>
+            </div>
+
+        <!-- Extra fields -->
+        <div id="extra-guerrero" class="extra-field" style="display:none;">
+            <label>Armadura:</label>
+            <input type="number" name="armadura">
+        </div>
+
+        <div id="extra-mago" class="extra-field" style="display:none;">
+            <label>Maná:</label>
+            <input type="number" name="mana">
+        </div>
+
+        <div id="extra-arquero" class="extra-field" style="display:none;">
+            <label>Precisión:</label>
+            <input type="number" name="precision">
+        </div>
+
             <button type="submit">Crear</button>
         </div>
     </div>
 </form>
+
+<script>
+document.getElementById("clase-select").addEventListener("change", function() {
+    let value = this.value;
+
+    // Hide all
+    document.querySelectorAll(".extra-field").forEach(el => {
+        el.style.display = "none";
+    });
+
+    // Show selected
+    if (value) {
+        let selected = document.getElementById("extra-" + value);
+        if (selected) {
+            selected.style.display = "block";
+        }
+    }
+});
+</script>
+
 {% endblock %}
